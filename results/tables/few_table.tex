@@ -1,0 +1,12 @@
+\begin{tabular}{lrccccc}
+\toprule
+Phương pháp & Tham số học & Dice $\uparrow$ & Jaccard $\uparrow$ & HD95 (vx) $\downarrow$ & ASD (vx) $\downarrow$ & $|\Delta V|$ (\%) $\downarrow$\\
+\midrule
+U-Net 2D (từ đầu) & 1{,}94\,M & 0{,}828{\scriptsize$\pm$0{,}013} & 0{,}716{\scriptsize$\pm$0{,}024} & 19{,}55{\scriptsize$\pm$7{,}29} & 3{,}57{\scriptsize$\pm$0{,}82} & 17{,}3{\scriptsize$\pm$3{,}5}\\
+A: DINOv3 & 0{,}20\,M & 0{,}849{\scriptsize$\pm$0{,}003} & 0{,}740{\scriptsize$\pm$0{,}005} & 20{,}55{\scriptsize$\pm$1{,}58} & 3{,}50{\scriptsize$\pm$0{,}19} & 14{,}4{\scriptsize$\pm$3{,}9}\\
+B: MRI-CORE & 0{,}20\,M & 0{,}849{\scriptsize$\pm$0{,}002} & 0{,}744{\scriptsize$\pm$0{,}001} & \textbf{13{,}85{\scriptsize$\pm$1{,}31}} & 2{,}80{\scriptsize$\pm$0{,}13} & 11{,}7{\scriptsize$\pm$0{,}8}\\
+C: Ghép nối & 0{,}33\,M & \textbf{0{,}864{\scriptsize$\pm$0{,}003}} & \textbf{0{,}762{\scriptsize$\pm$0{,}006}} & 14{,}75{\scriptsize$\pm$1{,}86} & 2{,}86{\scriptsize$\pm$0{,}19} & \textbf{9{,}7{\scriptsize$\pm$0{,}5}}\\
+\textbf{D: GateFuse (đề xuất)} & 0{,}30\,M & 0{,}857{\scriptsize$\pm$0{,}004} & 0{,}753{\scriptsize$\pm$0{,}006} & 14{,}67{\scriptsize$\pm$1{,}31} & 2{,}86{\scriptsize$\pm$0{,}10} & 12{,}4{\scriptsize$\pm$2{,}0}\\
+\textbf{D+: GateFuse + nhánh Sobel} & 0{,}30\,M & 0{,}862{\scriptsize$\pm$0{,}009} & 0{,}761{\scriptsize$\pm$0{,}013} & 14{,}23{\scriptsize$\pm$0{,}90} & \textbf{2{,}80{\scriptsize$\pm$0{,}08}} & 10{,}6{\scriptsize$\pm$1{,}8}\\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,33 @@
+% Pipeline diagram shared by the report and the slides (needs tikz + arrows.meta, positioning)
+\begin{tikzpicture}[
+  font=\sffamily\scriptsize, >=Stealth, node distance=3mm and 4mm,
+  box/.style={draw=black!55, rounded corners=2pt, align=center, inner sep=3pt, minimum height=9mm, fill=white},
+  stage/.style={box, fill=ptitred!8},
+  enc/.style={box, minimum width=27mm},
+  arr/.style={->, thick, black!65},
+  lab/.style={font=\sffamily\tiny, text=black!60}]
+  \node[stage] (in) {Khối LGE-MRI\\$h\times w\times 88$};
+  \node[stage, right=of in] (pre) {Tiền xử lý (ch.\,2--3)\\cắt percentile 0.5--99.5\\min--max theo lát\\đệm 256, phóng $\times2$};
+  \node[enc, right=6mm of pre, yshift=7mm, fill=blue!7] (dino) {DINOv3 ViT-B/16\\(đông cứng, ảnh tự nhiên)};
+  \node[enc, right=6mm of pre, yshift=-7mm, fill=orange!10] (mri) {MRI-CORE ViT-B/16\\(đông cứng, 6\,tr lát MRI)};
+  \node[box, right=13mm of dino] (pd) {chiếu $1{\times}1$\\$P_D$};
+  \node[box, right=13mm of mri] (pm) {chiếu $1{\times}1$\\$P_M$};
+  \path (pd.east) -- (pm.east) coordinate[midway] (mid);
+  \node[box, right=6mm of mid, fill=green!8] (gate) {Cổng học được\\$g=\sigma(\mathrm{conv}[P_D,P_M])$\\$F=g P_D+(1-g)P_M$};
+  \node[box, right=of gate] (dec) {Decoder\\$32\to256$};
+  \node[stage, right=of dec] (post) {Hậu xử lý (ch.\,7)\\ngưỡng 0.5\\TPLT 3D lớn nhất\\lấp lỗ};
+  \node[box, below=4mm of post] (out) {Mặt nạ 3D\\Dice, Jaccard\\HD95, ASD};
+  \node[box, dashed, fill=violet!6, below=9mm of gate] (det) {Nhánh chi tiết (D+)\\ảnh + gradient Sobel (ch.\,5)\\2 lớp conv ở $256{\times}256$};
+  \draw[arr] (in) -- (pre);
+  \draw[arr] (pre.east) -- ++(3mm,0) |- (dino.west);
+  \draw[arr] (pre.east) -- ++(3mm,0) |- (mri.west);
+  \draw[arr] (dino) -- node[above, lab]{$768{\times}32{\times}32$} (pd);
+  \draw[arr] (mri) -- node[below, lab]{$768{\times}32{\times}32$} (pm);
+  \draw[arr] (pd.east) -- ++(2mm,0) |- (gate.west);
+  \draw[arr] (pm.east) -- ++(2mm,0) |- (gate.west);
+  \draw[arr] (gate) -- (dec);
+  \draw[arr] (dec) -- (post);
+  \draw[arr] (post) -- (out);
+  \draw[arr, dashed] (pre.south) |- (det.west);
+  \draw[arr, dashed] (det.east) -| node[pos=0.8, right, lab]{ghép} (dec.south);
+\end{tikzpicture}

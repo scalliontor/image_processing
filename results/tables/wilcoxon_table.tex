@@ -1,0 +1,16 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{72 khối có nhãn} & \multicolumn{3}{c}{8 khối có nhãn}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+So sánh & $\Delta$Dice & thắng & $p$ & $\Delta$Dice & thắng & $p$\\
+\midrule
+MRI-CORE vs DINOv3 & +0{,}0062 & 15/20 & \textbf{0{,}036} & -0{,}0002 & 14/20 & 0{,}165\\
+Ghép nối vs DINOv3 & +0{,}0100 & 19/20 & \textbf{$<$0{,}001} & +0{,}0148 & 16/20 & 0{,}064\\
+GateFuse vs DINOv3 & +0{,}0093 & 18/20 & \textbf{0{,}001} & +0{,}0076 & 15/20 & 0{,}154\\
+GateFuse vs MRI-CORE & +0{,}0031 & 16/20 & \textbf{0{,}001} & +0{,}0078 & 10/20 & 0{,}956\\
+GateFuse vs Ghép nối & -0{,}0007 & 8/20 & 0{,}294 & -0{,}0072 & 8/20 & 0{,}202\\
+D+ vs GateFuse & +0{,}0017 & 13/20 & 0{,}097 & +0{,}0058 & 13/20 & 0{,}133\\
+GateFuse vs U-Net & -0{,}0005 & 10/20 & 0{,}869 & +0{,}0285 & 16/20 & \textbf{0{,}008}\\
+D+ vs U-Net & +0{,}0012 & 11/20 & 0{,}841 & +0{,}0344 & 16/20 & \textbf{0{,}004}\\
+\bottomrule
+\end{tabular}
