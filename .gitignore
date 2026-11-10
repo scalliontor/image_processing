@@ -1,0 +1,18 @@
+# data, weights, cached features and run outputs live outside git
+work/
+*.npy
+*.npz
+*.pth
+!results/checkpoints/*.pt
+__pycache__/
+.venv/
+.DS_Store
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
